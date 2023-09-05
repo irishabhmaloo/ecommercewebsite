@@ -7,8 +7,6 @@ const connectDatabase = () => {
         // useCreateIndex: true
     }).then((con) => {
         console.log(`MongoDB connected with server: ${con.connection.host}`);
-    }).catch((err) => {
-        console.log(err);
     });
 };
 

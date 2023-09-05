@@ -1,93 +1,82 @@
+const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const Product = require('../models/productModel');
+const ErrorHandler = require('../utils/errorHandler');
+const catchAsyncErrors = require('./middleware/catchAsyncErrors');
 
 // CREATE product -- ADMIN
-exports.createProduct = async (req, res) => {
-    try {
-        const product = await Product.create(req.body);
-        res.status(201).json({
-            status: "success",
-            data: {
-                product
-            }
-        })
-    } catch(err) {
-        res.status(400).json({
-            status: "fail",
-            message: "failure occured"
-        })
-    }
-}
+exports.createProduct = catchAsyncErrors(async (req, res) => {
+    const product = await Product.create(req.body);
+    
+    res.status(201).json({
+        status: "success",
+        data: {
+            product
+        }
+    });
+});
 
 // GET all products
-exports.getAllProducts = async (req, res) => {
-    try {
-        const products = await Product.find();
-        res.status(201).json({
-            status: "success",
-            data: {
-                products
-            }
-        })
-    } catch(err) {
-        res.status(400).json({
-            status: "fail",
-            message: "failure occured"
-        })
-    }
-};
+exports.getAllProducts = catchAsyncErrors(async (req, res) => {
+    const products = await Product.find();
+
+    res.status(200).json({
+        status: "success",
+        data: {
+            products
+        }
+    });
+});
 
 // GET product details
-exports.getProductDetails = async (req, res) => {
-    try {
-        const product = await Product.findById(req.params.id);
-        res.status(201).json({
-            status: "success",
-            data: {
-                product
-            }
-        })
-    } catch(err) {
-        res.status(500).json({
-            status: "fail",
-            message: "Product not found"
-        })
+exports.getProductDetails = catchAsyncErrors(async (req, res) => {
+    const product = await Product.findById(req.params.id);
+    
+    if (!product) {
+        return next(new ErrorHandler("Product not found", 404));
     }
-};
+
+    res.status(200).json({
+        status: "success",
+        data: {
+            product
+        }
+    });
+});
 
 // UPDATE product -- ADMIN
-exports.updateProduct = async (req, res) => {
-    try {
-        const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
-            useFindAndModify: false,
-            runValidators: true
-        });
-        res.status(200).json({
-            status: "success",
-            data: {
-                product
-            }
-        })
-    } catch(err) {
-        res.status(500).json({
-            status: "fail",
-            message: "No product found"
-        })
+exports.updateProduct = catchAsyncErrors(async (req, res) => {
+    let product = await Product.findById(req.params.id);
+    
+    if (!product) {
+        return next(new ErrorHandler("Product not found", 404));
     }
-};
+    
+    product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        useFindAndModify: false,
+        runValidators: true
+    });
+
+    res.status(200).json({
+        status: "success",
+        data: {
+            product
+        }
+    });
+});
 
 // DELETE product -- ADMIN
-exports.deleteProduct = async (req, res) => {
-    try {
-        await Product.findByIdAndDelete(req.params.id);
-        res.status(200).json({
-            status: "success",
-            data: null
-        })
-    } catch(err) {
-        res.status(500).json({
-            status: "fail",
-            message: "No product found"
-        })
+exports.deleteProduct = catchAsyncErrors(async (req, res) => {
+    const product = await Product.findById(req.params.id);
+    
+    if (!product) {
+        return next(new ErrorHandler("Product not found", 404));
     }
-};
+
+    await Product.remove();
+    
+    res.status(200).json({
+        status: "success",
+        data: null
+    });
+});
