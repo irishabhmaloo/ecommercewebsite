@@ -5,6 +5,8 @@ import Product from "./Product";
 import MetaData from "../layout/metaData";
 import { getProduct } from "../../actions/productAction";
 import { useSelector, useDispatch } from "react-redux";
+import Loader from "../layout/Loader/Loader";
+import {useAlert} from "react-alert";
 
 // temporary static object for checking purpose
 // const product = {
@@ -16,37 +18,44 @@ import { useSelector, useDispatch } from "react-redux";
 
 
 const Home = () => {
-    
+
     // GET all products from backend
+    const alert = useAlert();
     const dispatch = useDispatch();
-    const {loading, error, products, productsCount} = useSelector(state => state.products);
+    const { loading, error, products, productsCount } = useSelector(state => state.products);
 
     useEffect(() => {
+        if(error) {
+            return alert.error(error);
+        }
+        
         dispatch(getProduct());
-    }, [dispatch]);
+    }, [dispatch, error]);
 
     return (
         <>
-            <MetaData title="ECOMMERCE" />
-            
-            <div className="banner">
-                <p>Welcome to Ecommerce</p>
-                <h1>FIND AMAZING PRODUCTS BELOW</h1>
+            {loading ? <Loader /> : <>
+                <MetaData title="ECOMMERCE" />
 
-                <a href="#container">
-                    <button>
-                        Scroll
-                        {/* <CgMouse /> */}
-                    </button>
-                </a>
-            </div>
+                <div className="banner">
+                    <p>Welcome to Ecommerce</p>
+                    <h1>FIND AMAZING PRODUCTS BELOW</h1>
 
-            <h2 className="homeHeading">Featured Products</h2>
+                    <a href="#container">
+                        <button>
+                            Scroll
+                            {/* <CgMouse /> */}
+                        </button>
+                    </a>
+                </div>
 
-            <div className="container" id="container">
-                {/* product component will be populated */}
-                {products && products.map((product) => <Product product={product} />)}
-            </div>
+                <h2 className="homeHeading">Featured Products</h2>
+
+                <div className="container" id="container">
+                    {/* product component will be populated */}
+                    {products && products.map((product) => <Product product={product} />)}
+                </div>
+            </>}
         </>
     )
 }
