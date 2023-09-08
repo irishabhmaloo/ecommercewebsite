@@ -4,7 +4,7 @@ import App from './App';
 import store from "./store";
 import { Provider } from "react-redux";
 
-import { position, transitions, Provider as AlertProvider } from "react-alert";
+import { positions, transitions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 
 const options = {
