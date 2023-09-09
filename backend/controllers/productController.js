@@ -42,7 +42,7 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
 
 // GET product details
 exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
-    console.log(req.params.id);
+    // console.log(req.params.id);
     const product = await Product.findById(req.params.id);
     if (!product) {
         return next(new ErrorHandler("Product not found", 404));

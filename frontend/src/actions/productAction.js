@@ -8,12 +8,14 @@ import {
     PRODUCT_DETAILS_SUCCESS, 
     CLEAR_ERRORS} from "../constants/productConstant";
 
-export const getProduct = () => async (dispatch) => {
+export const getProduct = (keyword="") => async (dispatch) => {
     try {
         dispatch({type: ALL_PRODUCT_REQUEST});
 
+        let link = `/api/v1/products?keyword=${keyword}`;
+
         // GET all products from BACKEND
-        const data = await axios.get("/api/v1/products");
+        const data = await axios.get(link);
         // console.log(data.data.data);
         dispatch({
             type: ALL_PRODUCT_SUCCESS,
