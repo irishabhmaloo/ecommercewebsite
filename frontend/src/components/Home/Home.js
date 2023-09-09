@@ -24,6 +24,7 @@ const Home = () => {
     const dispatch = useDispatch();
     const { loading, error, products, productsCount } = useSelector(state => state.products);
 
+    // console.log(products);
     useEffect(() => {
         if(error) {
             return alert.error(error);
@@ -53,7 +54,7 @@ const Home = () => {
 
                 <div className="container" id="container">
                     {/* product component will be populated */}
-                    {products && products.map((product) => <Product product={product} />)}
+                    {products && products.map((product) => <Product key={product._id} product={product} />)}
                 </div>
             </>}
         </>

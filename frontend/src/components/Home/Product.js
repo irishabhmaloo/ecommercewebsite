@@ -13,13 +13,15 @@ const Product = ({ product }) => {
     isHalf: true
   }
 
+  // console.log(product);
+
   return (
     <Link className="productCard" to={product._id}>
-      <img src={product.images[0].url} alt={product.name} />
+      <img src={product.image[0].url} alt={product.name} />
       <p>{product.name}</p>
       <div>
         <ReactStars {...options} />
-        <span> ({product.numOfReviews} Reviews) </span>
+        <span> ({product.numberOfReviews} Reviews) </span>
       </div>
       <span>{`Rs ${product.price}`}</span>
     </Link>

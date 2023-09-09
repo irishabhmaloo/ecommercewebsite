@@ -7,9 +7,10 @@ export const getProduct = () => async (dispatch) => {
 
         // GET all products from BACKEND
         const data = await axios.get("/api/v1/products");
+        // console.log(data.data.data);
         dispatch({
             type: ALL_PRODUCT_SUCCESS,
-            payload: data
+            payload: data.data.data
         })
     } catch (error) {
         // if unable to get products from Backend
