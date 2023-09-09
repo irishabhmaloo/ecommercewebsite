@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 // import { CgMouse } from "react-icons/all";
 import "./Home.css";
-import Product from "./Product";
+import Product from "./ProductCard";
 import MetaData from "../layout/metaData";
-import { getProduct } from "../../actions/productAction";
+import { getProduct, clearErrors } from "../../actions/productAction";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../layout/Loader/Loader";
 import {useAlert} from "react-alert";
@@ -27,11 +27,12 @@ const Home = () => {
     // console.log(products);
     useEffect(() => {
         if(error) {
-            return alert.error(error);
+            alert.error(error);
+            dispatch(clearErrors());
         }
         
         dispatch(getProduct());
-    }, [dispatch, error]);
+    }, [dispatch, error, alert]);
 
     return (
         <>
