@@ -36,7 +36,7 @@ export const getProductDetails = (id) => async (dispatch) => {
 
         // GET all products from BACKEND
         const data = await axios.get(`/api/v1/products/${id}`);
-        // console.log(data.data.data);
+        console.log(data.data.data);
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
             payload: data.data.data.product
