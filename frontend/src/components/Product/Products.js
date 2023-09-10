@@ -7,27 +7,49 @@ import ProductCard from "../Home/ProductCard";
 import { useParams } from 'react-router-dom';
 import MetaData from "../layout/metaData";
 import Pagination from "react-js-pagination";
+import Slider from "@mui/material/Slider";
+import Typography from "@mui/material/Typography";
+import { useAlert } from "react-alert";
+
+// Categories
+const categories = [
+    "Laptop",
+    "Footwear",
+    "Bottom",
+    "Tops",
+    "Attire",
+    "Camera",
+    "SmartPhones",
+];
 
 const Products = () => {
 
-    const { keyword } = useParams();
+    const { keyword } = useParams(); // search keyword
     const dispatch = useDispatch();
-    const [currentPage, setCurrentPage] = useState(1);
+    const alert = useAlert();
+    const [currentPage, setCurrentPage] = useState(1); // pagination
+    const [price, setPrice] = useState([0, 25000]); // price filter
+    const [category, setCategory] = useState(""); // category filter
+    const [ratings, setRatings] = useState(0); // ratings filter
 
     const {
         products,
         loading,
         error,
         productsCount,
-        resultsPerPage
+        resultsPerPage,
+        filteredProductsCount
     } = useSelector((state) => state.products);
 
-    // console.log(resultsPerPage);
-    // console.log(productsCount);
-
+    // pagination
     const setCurrentPageNo = (e) => {
         setCurrentPage(e);
     };
+
+    // price filter
+    const priceHandler = (event, newPrice) => {
+        setPrice(newPrice);
+    }
 
     useEffect(() => {
         if (error) {
@@ -35,9 +57,10 @@ const Products = () => {
             dispatch(clearErrors());
         }
 
-        dispatch(getProduct(keyword, currentPage));
-    }, [dispatch, alert, error, keyword, currentPage]);
+        dispatch(getProduct(keyword, currentPage, price, category, ratings));
+    }, [dispatch, alert, error, keyword, currentPage, price, category, ratings]);
 
+    let totalCount = filteredProductsCount;
 
     return (
         <>
@@ -53,8 +76,48 @@ const Products = () => {
                             ))}
                     </div>
 
+                    {keyword && <div className="filterBox">
+                        <Typography>Price</Typography>
+                        <Slider
+                            value={price}
+                            onChange={priceHandler}
+                            valueLabelDisplay="auto"
+                            aria-labelledby="range-slider"
+                            min={0}
+                            max={25000}
+                        />
+
+                        <Typography>Categories</Typography>
+                        <ul className="categoryBox">
+                            {categories.map((category) => (
+                                <li
+                                    className="category-link"
+                                    key={category}
+                                    onClick={() => setCategory(category)}
+                                >
+                                    {category}
+                                </li>
+                            ))}
+                        </ul>
+
+                        <fieldset>
+                            <Typography component="legend">Ratings Above</Typography>
+                            <Slider
+                                value={ratings}
+                                onChange={(e, newRating) => {
+                                    setRatings(newRating);
+                                }}
+                                aria-labelledby="continuous-slider"
+                                valueLabelDisplay="auto"
+                                min={0}
+                                max={5}
+                            />
+                        </fieldset>
+                    </div>}            
+                    
+
                     {/* Pagination */}
-                    {resultsPerPage < productsCount && (
+                    {resultsPerPage < totalCount && (
                         <div className="paginationBox">
                             <Pagination
                                 activePage={currentPage}

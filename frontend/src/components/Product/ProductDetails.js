@@ -43,7 +43,7 @@ const ProductDetails = () => {
     return (
         <>
             {loading ? <Loader /> : <>
-                <MetaData title="Product Details" />
+                <MetaData title={`${product.name} -- ECOMMERCE`} />
 
                 <div className="ProductDetails">
                     <div>

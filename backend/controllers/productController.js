@@ -5,11 +5,11 @@ const ErrorHandler = require('../utils/errorHandler');
 
 // CREATE product -- ADMIN
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
-    
+
     req.body.user = req.user.id;
-    
+
     const product = await Product.create(req.body);
-    
+
     res.status(201).json({
         status: "success",
         data: {
@@ -20,15 +20,16 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
 // GET all products
 exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
-    
+
     const resultsPerPage = 8;
     const productsCount = await Product.countDocuments();
 
     const apiFeature = new ApiFeatures(Product.find(), req.query)
         .search()
-        .filter()
-        .pagination(resultsPerPage);
+        .filter().pagination(resultsPerPage);
+
     const products = await apiFeature.query;
+    let filteredProductsCount = products.length;
 
     res.status(200).json({
         status: "success",
@@ -36,7 +37,8 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
             productsCount,
             products,
             productsCount,
-            resultsPerPage
+            resultsPerPage,
+            filteredProductsCount
         }
     });
 });
@@ -60,11 +62,11 @@ exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
 // UPDATE product -- ADMIN
 exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
     let product = await Product.findById(req.params.id);
-    
+
     if (!product) {
         return next(new ErrorHandler("Product not found", 404));
     }
-    
+
     product = await Product.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         useFindAndModify: false,
@@ -82,13 +84,13 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
 // DELETE product -- ADMIN
 exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
     const product = await Product.findById(req.params.id);
-    
+
     if (!product) {
         return next(new ErrorHandler("Product not found", 404));
     }
 
-    await Product.deleteOne({_id: req.params.id});
-    
+    await Product.deleteOne({ _id: req.params.id });
+
     res.status(200).json({
         status: "success",
         data: null
@@ -98,7 +100,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
 
 // create new / update review
 exports.upsertProductReview = catchAsyncErrors(async (req, res, next) => {
-    
+
     const { rating, comment, productId } = req.body;
 
     const review = {
@@ -110,12 +112,12 @@ exports.upsertProductReview = catchAsyncErrors(async (req, res, next) => {
 
     const product = await Product.findById(productID);
     const isReviewed = product.reviews.find(rev => rev.user.toString() === req.user._id.toString());
-    
+
     if (isReviewed) {
         product.reviews.forEach(rev => {
-            if(rev.user.toString() === req.user._id.toString()) 
+            if (rev.user.toString() === req.user._id.toString())
                 (rev.rating = rating), (rev.comment = comment)
-            });
+        });
     } else {
         product.reviews.push(review);
         product.numberOfReviews = product.reviews.length
@@ -126,10 +128,10 @@ exports.upsertProductReview = catchAsyncErrors(async (req, res, next) => {
     let avg = 0;
     product.reviews.forEach(rev => {
         avg += rev.rating
-    }) 
+    })
     product.ratings = avg / product.reviews.length;
-    
-    await product.save({ validateBeforeSave: false});
+
+    await product.save({ validateBeforeSave: false });
 
     res.status(200).json({
         success: true
@@ -160,13 +162,13 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler("Product not found", 404));
     }
 
-    const reviews = product.reviews.filter( rev => rev._id.toString() !== req.query.idtoString());
+    const reviews = product.reviews.filter(rev => rev._id.toString() !== req.query.idtoString());
 
     // average ratings
     let avg = 0;
     reviews.forEach(rev => {
         avg += rev.rating
-    }) 
+    })
     const ratings = avg / reviews.length;
     const numOfReviews = reviews.length;
 
