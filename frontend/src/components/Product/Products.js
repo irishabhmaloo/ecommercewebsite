@@ -19,8 +19,11 @@ const Products = () => {
         loading,
         error,
         productsCount,
-        resultPerPage
+        resultsPerPage
     } = useSelector((state) => state.products);
+
+    // console.log(resultsPerPage);
+    // console.log(productsCount);
 
     const setCurrentPageNo = (e) => {
         setCurrentPage(e);
@@ -32,7 +35,7 @@ const Products = () => {
             dispatch(clearErrors());
         }
 
-        dispatch(getProduct(keyword));
+        dispatch(getProduct(keyword, currentPage));
     }, [dispatch, alert, error, keyword, currentPage]);
 
 
@@ -51,11 +54,11 @@ const Products = () => {
                     </div>
 
                     {/* Pagination */}
-                    {resultPerPage < productsCount && (
+                    {resultsPerPage < productsCount && (
                         <div className="paginationBox">
                             <Pagination
                                 activePage={currentPage}
-                                itemsCountPerPage={resultPerPage}
+                                itemsCountPerPage={resultsPerPage}
                                 totalItemsCount={productsCount}
                                 onChange={setCurrentPageNo}
                                 nextPageText="Next"

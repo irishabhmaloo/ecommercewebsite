@@ -13,6 +13,7 @@ export const getProduct = (keyword="", currentPage=1) => async (dispatch) => {
         dispatch({type: ALL_PRODUCT_REQUEST});
 
         let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}`;
+        // console.log(link);
 
         // GET all products from BACKEND
         const data = await axios.get(link);
