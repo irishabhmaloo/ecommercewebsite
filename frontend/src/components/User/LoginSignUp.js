@@ -1,5 +1,5 @@
 import React from 'react';
-import "../layout/Loader/Loader";
+import"./LoginSignUp.css";
 import Loader from "../layout/Loader/Loader";
 import { Link } from "react-router-dom";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
@@ -30,7 +30,7 @@ const LoginSignUp = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  // state for suer data
+  // state for user data
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -87,7 +87,7 @@ const LoginSignUp = () => {
     if (isAuthenticated) {
       navigate("/account");
     }
-  }, [dispatch, error, alert, isAuthenticated]);
+  }, [dispatch, error, alert, isAuthenticated,navigate]);
 
   // for toggling button
   const switchTabs = (e, tab) => {
