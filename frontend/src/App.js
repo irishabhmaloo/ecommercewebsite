@@ -23,10 +23,10 @@ function App() {
       google: {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       }
-    })
+    });
 
     store.dispatch(loadUser());
-  });
+  }, []);
 
   return (
     <Router>

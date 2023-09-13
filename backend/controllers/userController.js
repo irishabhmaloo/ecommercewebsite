@@ -142,7 +142,7 @@ exports.resetPassword = catchAsyncErrors(async (req,res,next) => {
 
 // Get User Detail -- ONLY ACCESSED BY LOGGED IN USER
 exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
-    const user = await User.findOne(req.user.id);
+    const user = await User.findById(req.user.id);
 
     res.status(200).json({
         success: true,
