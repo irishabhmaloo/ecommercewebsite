@@ -13,6 +13,9 @@ import store from "./store";
 import { loadUser } from "./actions/userAction";
 import UserOptions from "./components/layout/Header/UserOptions.js";
 import { useSelector } from "react-redux";
+import Profile from "./components/User/Profile.js";
+import UpdateProfile from "./components/User/UpdateProfile.js";
+import ProtectedRoute from './components/Route/ProtectedRoute';
 
 function App() {
 
@@ -41,6 +44,10 @@ function App() {
         <Route exact path="/products/:keyword" element = {<Products />} />
         <Route exact path="/search" element = {<Search />} />
         <Route exact path="/login" element = {<LoginSignUp />} />
+        <Route element={<ProtectedRoute />}>
+          <Route exact path="/account" element = {<Profile />} />
+          <Route exact path="/me/update" element = {<UpdateProfile />} />
+        </Route>
       </Routes>
 
       <Footer />
