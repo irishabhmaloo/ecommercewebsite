@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 import MetaData from "../layout/metaData";
 import "./Search.css";
 import { useNavigate } from 'react-router-dom';
