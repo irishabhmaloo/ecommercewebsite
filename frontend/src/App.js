@@ -1,6 +1,6 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router , Route, Routes} from 'react-router-dom';
+import { BrowserRouter as Router , Route, Routes, Switch } from 'react-router-dom';
 import axios from 'axios';
 import WebFont from "webfontloader";
 import Header from './components/layout/Header/Header';
@@ -27,6 +27,8 @@ import Payment from "./components/Cart/Payment.js";
 import OrderSuccess from "./components/Cart/OrderSuccess.js";
 import { Elements } from "@stripe/react-stripe.js";
 import { loadStripe } from "@stripe/stripe.js";
+import { MyOrders } from "./components/Order/MyOrders.js";
+import { OrderDetails } from "./components/Order/OrderDetails.js";
 
 function App() {
 
@@ -70,11 +72,18 @@ function App() {
           <Route exact path="/me/update" element = {<UpdateProfile />} />
           <Route exact path="/password/update" element = {<UpdatePassword />} />
           <Route exact path="/shipping" element = {<Shipping />} />
-          <Route exact path="/order/confirm" element = {<ConfirmOrder />} />
+          
           {stripeApiKey && <Elements stripe={loadStripe(stripeApiKey)}>
             <Route exact path="/process/payment" element = {<Payment />} />
           </Elements>}
-          <Route exact path="/order/success" element = {<OrderSuccess />} />
+
+          <Route exact path="/success" element = {<OrderSuccess />} />
+          <Route exact path="/orders" element = {<MyOrders />} />
+
+          <Switch>
+            <Route exact path="/order/confirm" element = {<ConfirmOrder />} />
+            <Route exact path="/order/:id" element = {<OrderDetails />} />
+          </Switch>
         </Route>
         <Route exact path="/password/forgot" element = {<ForgotPassword />} />
         <Route exact path="/password/reset/:token" element = {<ResetPassword />} />
