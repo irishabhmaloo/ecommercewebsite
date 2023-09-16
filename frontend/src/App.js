@@ -29,6 +29,8 @@ import { Elements } from "@stripe/react-stripe.js";
 import { loadStripe } from "@stripe/stripe.js";
 import { MyOrders } from "./components/Order/MyOrders.js";
 import { OrderDetails } from "./components/Order/OrderDetails.js";
+import Contact from "./components/layout/Contact/Contact.js";
+import About from "./components/layout/About/About.js";
 
 function App() {
 
@@ -66,6 +68,8 @@ function App() {
         <Route exact path="/products" element = {<Products />} />
         <Route exact path="/products/:keyword" element = {<Products />} />
         <Route exact path="/search" element = {<Search />} />
+        <Route exact path="/contact" component={Contact} />
+        <Route exact path="/about" component={About} />
         <Route exact path="/login" element = {<LoginSignUp />} />
         <Route element={<ProtectedRoute />}>
           <Route exact path="/account" element = {<Profile />} />
