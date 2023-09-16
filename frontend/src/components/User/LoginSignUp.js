@@ -13,7 +13,7 @@ import { useRef } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-const LoginSignUp = () => {
+const LoginSignUp = ({location}) => {
 
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -78,6 +78,9 @@ const LoginSignUp = () => {
     }
   };
 
+  // if : /login?redirect=shipping then it spilts it at [1] gives shipping
+  const redirectLink = location.search ? location.search.spilt("=")[1] : "/account"; 
+
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -85,9 +88,9 @@ const LoginSignUp = () => {
     }
 
     if (isAuthenticated) {
-      navigate("/account");
+      navigate(redirectLink);
     }
-  }, [dispatch, error, alert, isAuthenticated,navigate]);
+  }, [dispatch, error, alert, isAuthenticated,navigate, redirectLink]);
 
   // for toggling button
   const switchTabs = (e, tab) => {
