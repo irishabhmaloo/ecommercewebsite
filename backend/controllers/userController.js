@@ -153,16 +153,17 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
 
 // Update User Password -- ONLY ACCESSED BY LOGGED IN USER
 exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
-    const user = await User.findOne(req.user.id).select("+password");
+    const user = await User.findById(req.user.id).select("+password");
 
     const isPasswordMatched = await user.comparePassword(req.body.oldPassword);
 
-    // console.log(isPasswordMatched);
+    // console.log(req.body.password);
+    // console.log(req.body.confirmPassword);
     if (!isPasswordMatched) {
         return next(new ErrorHandler("Old Password is incorrect", 401));
     }
 
-    if (req.body.password !== req.body.confirmPassword) {
+    if (req.body.newPassword !== req.body.confirmPassword) {
         return next(new ErrorHandler("Password Does Not Match Confirm Password", 400));
     }
 

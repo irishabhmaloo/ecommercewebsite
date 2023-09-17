@@ -11,7 +11,7 @@ import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 
-const UpdatePassword = ({ history }) => {
+const UpdatePassword = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
