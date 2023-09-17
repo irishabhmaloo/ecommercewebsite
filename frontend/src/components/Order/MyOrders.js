@@ -27,7 +27,8 @@ const MyOrders = () => {
       minWidth: 150,
       flex: 0.5,
       cellClassName: (params) => {
-        return params.getValue(params.id, "status") === "Delivered"
+        const status = params.row.status;
+        return status === "Delivered"
           ? "greenColor"
           : "redColor";
       },
@@ -56,9 +57,9 @@ const MyOrders = () => {
       type: "number",
       sortable: false,
       renderCell: (params) => {
+        const id = params.row.id;
         return (
-          // get value is a function of data grid to access other columns
-          <Link to={`/order/${params.getValue(params.id, "id")}`}>
+          <Link to={`/order/${id}`}>
             <LaunchIcon />
           </Link>
         );

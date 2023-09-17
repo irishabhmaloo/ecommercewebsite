@@ -75,7 +75,7 @@ function App() {
           <Route exact path="/account" element={<Profile />} />
           <Route exact path="/me/update" element={<UpdateProfile />} />
           <Route exact path="/password/update" element={<UpdatePassword />} />
-          <Route exact path="/shipping" element={<Shipping />} />
+          <Route exact path="login/shipping" element={<Shipping />} />
 
           <Route exact path="/process/payment" element={stripeApiKey && 
           <Elements stripe={loadStripe(stripeApiKey)}>

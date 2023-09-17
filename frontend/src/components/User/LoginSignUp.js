@@ -12,12 +12,14 @@ import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useLocation } from "react-router-dom";
 
-const LoginSignUp = ({location}) => {
+const LoginSignUp = () => {
 
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
+  const location = useLocation();
   
   const { error, loading, isAuthenticated } = useSelector(
     (state) => state.user
@@ -79,7 +81,7 @@ const LoginSignUp = ({location}) => {
   };
 
   // if : /login?redirect=shipping then it spilts it at [1] gives shipping
-  const redirectLink = location.search ? location.search.spilt("=")[1] : "/account"; 
+  const redirectLink = location.search ? location.search.split("=")[1] : "/account"; 
 
   useEffect(() => {
     if (error) {
