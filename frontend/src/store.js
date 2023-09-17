@@ -22,13 +22,13 @@ const reducer = combineReducers({
 let initialState = {
     // if something present in cart in local storage
     cart: {
-        cartItems: localStorage.getItem("cartItems") ? 
-            JSON.parse(localStorage.getItem("CartItems")) :
-            [],
-        shippingInfo: localStorage.getItem("shippingInfo") ? 
-        JSON.parse(localStorage.getItem("shippingInfo")) :
-        [],
-    },
+        cartItems: localStorage.getItem("cartItems")
+          ? JSON.parse(localStorage.getItem("cartItems"))
+          : [],
+        shippingInfo: localStorage.getItem("shippingInfo")
+          ? JSON.parse(localStorage.getItem("shippingInfo"))
+          : {},
+      },
 };
 
 const middleware = [thunk];
