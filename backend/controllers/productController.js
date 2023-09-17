@@ -110,7 +110,7 @@ exports.upsertProductReview = catchAsyncErrors(async (req, res, next) => {
         comment
     };
 
-    const product = await Product.findById(productID);
+    const product = await Product.findById(productId);
     const isReviewed = product.reviews.find(rev => rev.user.toString() === req.user._id.toString());
 
     if (isReviewed) {
