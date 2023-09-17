@@ -55,18 +55,19 @@ exports.loginUser = catchAsyncErrors(async (req,res,next) => {
 });
 
 
-// Logout A User
-exports.logoutUser = catchAsyncErrors(async (req,res,next) => {
+// Logout User
+exports.logoutUser = catchAsyncErrors(async (req, res, next) => {
+    
     res.cookie("token", null, {
-        expires: Date.now(),
-        httpOnly: true
+      expires: new Date(Date.now()),
+      httpOnly: true,
     });
 
     res.status(200).json({
-        success: true,
-        message: "Logged Out"
+      success: true,
+      message: "Logged Out",
     });
-});
+  });
 
 
 // Forget Password

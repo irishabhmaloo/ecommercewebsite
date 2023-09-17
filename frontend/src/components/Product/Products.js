@@ -66,7 +66,7 @@ const Products = () => {
         <>
             {loading ? <Loader /> :
                 <>
-                    <MetaData title="PRODUCTS -- ECOMMERCE" />
+                    <MetaData title="PRODUCTS -- ShauKing" />
                     <h2 className="productsHeading">Products</h2>
 
                     <div className="products">

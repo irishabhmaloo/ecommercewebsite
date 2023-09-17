@@ -112,12 +112,12 @@ const ProductDetails = () => {
     return (
         <>
             {loading ? <Loader /> : <>
-                <MetaData title={`${product.name} -- ECOMMERCE`} />
+                <MetaData title={`${product.name} -- ShauKing`} />
                 <div className="ProductDetails">
                     <div>
                         <Carousel>
-                            {product.images &&
-                                product.images.map((item, i) => (
+                            {product.image &&
+                                product.image.map((item, i) => (
                                     <img
                                         className="CarouselImage"
                                         key={i}

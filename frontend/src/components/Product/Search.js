@@ -18,7 +18,7 @@ const Search = () => {
 
     return (
         <>
-            <MetaData title="Search A Product -- ECOMMERCE" />
+            <MetaData title="Search A Product -- ShauKing" />
             <form className="searchBox" onSubmit={searchSubmitHandler}>
                 <input
                     type="text"

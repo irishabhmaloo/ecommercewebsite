@@ -3,6 +3,7 @@ import "./AboutSection.css";
 import { Button, Typography, Avatar } from "@mui/material";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import logo from "../../../images/logo.png";
 
 const About = () => {
   const visitInstagram = () => {
@@ -19,7 +20,7 @@ const About = () => {
           <div>
             <Avatar
               style={{ width: "10vmax", height: "10vmax", margin: "2vmax 0" }}
-              src="https://res.cloudinary.com/tripleayt/image/upload/v1631555947/products/jpyibarlaxawvcvqjv5b.png"
+              src={logo}
               alt="Founder"
             />
             <Typography>ShauKings</Typography>
