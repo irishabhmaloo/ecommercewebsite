@@ -13,6 +13,7 @@ import { useRef } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useLocation } from "react-router-dom";
+import profile from "../../images/Profile.png";
 
 const LoginSignUp = () => {
 
@@ -42,8 +43,8 @@ const LoginSignUp = () => {
   const { name, email, password } = user;
 
   // for display picture
-  const [avatar, setAvatar] = useState("/Profile.png");
-  const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
+  const [avatar, setAvatar] = useState(profile);
+  const [avatarPreview, setAvatarPreview] = useState(profile);
 
   const loginSubmit = (e) => {
     e.preventDefault();
