@@ -1,6 +1,6 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router , Route, Routes, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import WebFont from "webfontloader";
 import Header from './components/layout/Header/Header';
@@ -25,10 +25,10 @@ import Shipping from "./components/Cart/Shipping.js";
 import ConfirmOrder from "./components/Cart/ConfirmOrder.js";
 import Payment from "./components/Cart/Payment.js";
 import OrderSuccess from "./components/Cart/OrderSuccess.js";
-import { Elements } from "@stripe/react-stripe.js";
-import { loadStripe } from "@stripe/stripe.js";
-import { MyOrders } from "./components/Order/MyOrders.js";
-import { OrderDetails } from "./components/Order/OrderDetails.js";
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import MyOrders from "./components/Order/MyOrders.js";
+import OrderDetails from './components/Order/OrderDetails';
 import Contact from "./components/layout/Contact/Contact.js";
 import About from "./components/layout/About/About.js";
 
@@ -63,35 +63,36 @@ function App() {
       {isAuthenticated && <UserOptions user={user} />}
 
       <Routes>
-        <Route exact path="/" element = {<Home />} />
-        <Route exact path="/product/:id" element = {<ProductDetails />} />
-        <Route exact path="/products" element = {<Products />} />
-        <Route exact path="/products/:keyword" element = {<Products />} />
-        <Route exact path="/search" element = {<Search />} />
-        <Route exact path="/contact" component={Contact} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/login" element = {<LoginSignUp />} />
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/product/:id" element={<ProductDetails />} />
+        <Route exact path="/products" element={<Products />} />
+        <Route exact path="/products/:keyword" element={<Products />} />
+        <Route exact path="/search" element={<Search />} />
+        <Route exact path="/contact" element={<Contact />} />
+        <Route exact path="/about" element={<About />} />
+        <Route exact path="/login" element={<LoginSignUp />} />
         <Route element={<ProtectedRoute />}>
-          <Route exact path="/account" element = {<Profile />} />
-          <Route exact path="/me/update" element = {<UpdateProfile />} />
-          <Route exact path="/password/update" element = {<UpdatePassword />} />
-          <Route exact path="/shipping" element = {<Shipping />} />
+          <Route exact path="/account" element={<Profile />} />
+          <Route exact path="/me/update" element={<UpdateProfile />} />
+          <Route exact path="/password/update" element={<UpdatePassword />} />
+          <Route exact path="/shipping" element={<Shipping />} />
+
+          <Route exact path="/process/payment" element={stripeApiKey && 
+          <Elements stripe={loadStripe(stripeApiKey)}>
+            <Payment />
+          </Elements>}/>
           
-          {stripeApiKey && <Elements stripe={loadStripe(stripeApiKey)}>
-            <Route exact path="/process/payment" element = {<Payment />} />
-          </Elements>}
 
-          <Route exact path="/success" element = {<OrderSuccess />} />
-          <Route exact path="/orders" element = {<MyOrders />} />
+          <Route exact path="/success" element={<OrderSuccess />} />
+          <Route exact path="/orders" element={<MyOrders />} />
 
-          <Switch>
-            <Route exact path="/order/confirm" element = {<ConfirmOrder />} />
-            <Route exact path="/order/:id" element = {<OrderDetails />} />
-          </Switch>
+
+          <Route exact path="/order/confirm" element={<ConfirmOrder />} />
+          <Route exact path="/order/:id" element={<OrderDetails />} />
         </Route>
-        <Route exact path="/password/forgot" element = {<ForgotPassword />} />
-        <Route exact path="/password/reset/:token" element = {<ResetPassword />} />
-        <Route exact path="/cart" element = {<Cart />} />
+        <Route exact path="/password/forgot" element={<ForgotPassword />} />
+        <Route exact path="/password/reset/:token" element={<ResetPassword />} />
+        <Route exact path="/cart" element={<Cart />} />
       </Routes>
 
       <Footer />

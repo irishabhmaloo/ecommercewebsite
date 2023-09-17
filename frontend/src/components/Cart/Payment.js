@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import CheckoutSteps from "../Cart/CheckoutSteps";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../layout/metaData";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { useAlert } from "react-alert";
 import {
     CardNumberElement,
@@ -15,7 +15,7 @@ import {
 import axios from "axios";
 import "./Payment.css";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
-import EventIcon from "@mui/icons-material/icons/Event";
+import EventIcon from "@mui/icons-material/Event";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import { createOrder, clearErrors } from "../../actions/orderAction";
 import { useNavigate } from "react-router-dom";

@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
     clearErrors,
     getProductDetails,
+    newReview
 } from "../../actions/productAction";
 import ReviewCard from "./ReviewCard.js";
 // import ReactStars from "react-rating-stars-component";
@@ -19,8 +20,9 @@ import {
     DialogContent,
     DialogTitle,
     Button,
-} from "@material-ui/core";
-import { Rating } from "@material-ui/lab";
+} from "@mui/material";
+import { Rating } from "@mui/lab";
+import { NEW_REVIEW_RESET } from "../../constants/productConstant"
 
 const ProductDetails = () => {
 
@@ -69,7 +71,7 @@ const ProductDetails = () => {
 
         myForm.set("rating", rating);
         myForm.set("comment", comment);
-        myForm.set("productId", match.params.id);
+        myForm.set("productId", id);
 
         dispatch(newReview(myForm));
 

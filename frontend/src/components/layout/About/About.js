@@ -1,6 +1,6 @@
 import React from "react";
 import "./AboutSection.css";
-import { Button, Typography, Avatar } from "@material-ui/core";
+import { Button, Typography, Avatar } from "@mui/material";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import InstagramIcon from "@mui/icons-material/Instagram";
 
@@ -22,13 +22,12 @@ const About = () => {
               src="https://res.cloudinary.com/tripleayt/image/upload/v1631555947/products/jpyibarlaxawvcvqjv5b.png"
               alt="Founder"
             />
-            <Typography>Abhishek Singh</Typography>
+            <Typography>ShauKings</Typography>
             <Button onClick={visitInstagram} color="primary">
               Visit Instagram
             </Button>
             <span>
-              This is a sample wesbite made by @meabhisingh. Only with the
-              purpose to teach MERN Stack on the channel 6 Pack Programmer
+              Shop your favourite products at best prices only at Shaukings.com
             </span>
           </div>
           <div className="aboutSectionContainer2">
