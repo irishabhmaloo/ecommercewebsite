@@ -60,6 +60,10 @@ const LoginSignUp = () => {
     myForm.set("email", email);
     myForm.set("password", password);
     myForm.set("avatar", avatar);
+
+    console.log(name);
+    console.log(avatar);
+    console.log(myForm);
     dispatch(register(myForm));
   }
 
