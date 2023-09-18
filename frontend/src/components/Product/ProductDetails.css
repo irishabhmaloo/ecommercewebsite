@@ -22,8 +22,13 @@
     align-items: flex-start;
 }
 
+.css-ohwg9z {
+    width:100%
+}
+
 .CarouselImage {
-    width: 20vmax;
+    width:100%;
+    height: auto;
 }
 
 .detailsBlock-1>h2 {
