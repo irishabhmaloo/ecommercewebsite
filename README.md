@@ -18,12 +18,7 @@ cd frontend
 npm install
 
 Usage: 
-To run both the backend and frontend, use the following command in their respective folders:
-
-## In the root folder for backend
-npm start
-
-## In the frontend folder for frontend
+To run both the backend and frontend, use the following command in their respective folders:  
 npm start
 
 ## Features: 
@@ -31,6 +26,7 @@ npm start
 > Product Browsing: Browse a wide range of products with ease.  
 > Secure Payments: Ensure secure transactions with integrated payment methods (using API provided by Stripe).  
 > Order Management: Easily manage and track your orders.  
+
 
 Acknowledgment: 
 This project is inspired by '6 Pack Programmer' on YouTube. It was created with the sole purpose of understanding the tech stack used and how these technologies coordinate with each other.  
