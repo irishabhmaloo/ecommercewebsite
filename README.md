@@ -27,13 +27,13 @@ npm start
 npm start
 
 ## Features: 
-User Authentication: Secure user authentication for a personalized experience.
-Product Browsing: Browse a wide range of products with ease.
-Secure Payments: Ensure secure transactions with integrated payment methods (using API provided by Stripe).
-Order Management: Easily manage and track your orders.
+> User Authentication: Secure user authentication for a personalized experience.  
+> Product Browsing: Browse a wide range of products with ease.  
+> Secure Payments: Ensure secure transactions with integrated payment methods (using API provided by Stripe).  
+> Order Management: Easily manage and track your orders.  
 
 Acknowledgment: 
-This project is inspired by '6 Pack Programmer' on YouTube. It was created with the sole purpose of understanding the tech stack used and how these technologies coordinate with each other.
+This project is inspired by '6 Pack Programmer' on YouTube. It was created with the sole purpose of understanding the tech stack used and how these technologies coordinate with each other.  
 
 Contact: 
 For any inquiries or feedback, please feel free to reach out via email at therishabhrox@gmail.com.
