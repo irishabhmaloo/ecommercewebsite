@@ -7,6 +7,7 @@ ShauKing is an ecommerce website application developed using the MERN stack, Red
 1. Clone the repository:
    ```bash
    git clone https://github.com/irishabhmaloo/ecommercewebsite.git
+
 Install dependencies:
 
 # In the root folder
@@ -16,7 +17,7 @@ npm install
 cd frontend
 npm install
 
-Usage
+Usage: 
 To run both the backend and frontend, use the following command in their respective folders:
 
 # In the root folder for backend
@@ -25,14 +26,14 @@ npm start
 # In the frontend folder for frontend
 npm start
 
-Features
+Features: 
 User Authentication: Secure user authentication for a personalized experience.
 Product Browsing: Browse a wide range of products with ease.
 Secure Payments: Ensure secure transactions with integrated payment methods (using API provided by Stripe).
 Order Management: Easily manage and track your orders.
 
-Acknowledgment
+Acknowledgment: 
 This project is inspired by '6 Pack Programmer' on YouTube. It was created with the sole purpose of understanding the tech stack used and how these technologies coordinate with each other.
 
-Contact
+Contact: 
 For any inquiries or feedback, please feel free to reach out via email at therishabhrox@gmail.com.
