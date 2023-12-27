@@ -1,0 +1,32 @@
+{
+  "name": "ecomapp",
+  "version": "1.0.0",
+  "description": "a real time ecommerce website clone",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Rishabh Maloo",
+  "license": "ISC",
+  "dependencies": {
+    "@stripe/react-stripe-js": "^2.3.0",
+    "@stripe/stripe-js": "^2.1.5",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cloudinary": "^1.40.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "country-state-city": "^3.2.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.0.0",
+    "mongoose": "^7.5.0",
+    "nodemailer": "^6.9.4",
+    "stripe": "^13.6.0",
+    "validator": "^13.11.0"
+  }
+}
