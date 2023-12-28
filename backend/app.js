@@ -29,9 +29,9 @@ const userRoute = require('./routes/userRoute');
 const orderRoute = require('./routes/orderRoute');
 const paymentRoute = require('./routes/paymentRoute');
 
-app.use("/", (req, res) => {
-    res.send("Hello from server");
-});
+// app.use("/", (req, res) => {
+//     res.send("Hello from server");
+// });
 
 app.use('/api/v1', productRoute);
 app.use('/api/v1', userRoute);
