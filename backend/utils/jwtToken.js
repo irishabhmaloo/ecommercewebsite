@@ -10,7 +10,7 @@ const sendToken = (user, statusCode, res) => {
         ),
         httponly: true,
         sameSite: 'None', // Set SameSite attribute to allow cross-site cookies
-        secure: process.env.NODE_ENV === 'production' // Add Secure attribute for HTTPS
+        secure: true
     }
 
     res.status(statusCode).cookie('token', token, options).json({
