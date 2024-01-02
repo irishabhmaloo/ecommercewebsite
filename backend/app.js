@@ -20,8 +20,10 @@ app.use(fileUpload());
 app.use(cors({
     origin: process.env.ORIGIN_URL,
     method: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 
 // Route imports
 const productRoute = require('./routes/productRoute');
