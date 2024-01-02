@@ -19,10 +19,6 @@ import {
 } from "../constants/productConstant";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
-console.log(backendUrl); // Check the value in the console
-
-console.log(process.env);
-
 
 export const getProduct = (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
     async (dispatch) => {
@@ -59,7 +55,7 @@ export const getProductDetails = (id) => async (dispatch) => {
         dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
         // GET all products from BACKEND
-        const data = await axios.get(`/api/v1/products/${id}`);
+        const data = await axios.get(backendUrl + `/api/v1/products/${id}`);
         //console.log(data.data.data);
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
@@ -83,7 +79,7 @@ export const newReview = (reviewData) => async (dispatch) => {
             headers: { "Content-Type": "application/json" },
         };
 
-        const { data } = await axios.put(`/api/v1/review`, reviewData, config);
+        const { data } = await axios.put(backendUrl + `/api/v1/review`, reviewData, config);
 
         dispatch({
             type: NEW_REVIEW_SUCCESS,
@@ -102,7 +98,7 @@ export const getAllReviews = (id) => async (dispatch) => {
     try {
         dispatch({ type: ALL_REVIEW_REQUEST });
 
-        const { data } = await axios.get(`/api/v1/reviews?id=${id}`);
+        const { data } = await axios.get(backendUrl + `/api/v1/reviews?id=${id}`);
 
         dispatch({
             type: ALL_REVIEW_SUCCESS,
@@ -122,7 +118,7 @@ export const deleteReviews = (reviewId, productId) => async (dispatch) => {
         dispatch({ type: DELETE_REVIEW_REQUEST });
 
         const { data } = await axios.delete(
-            `/api/v1/reviews?id=${reviewId}&productId=${productId}`
+            backendUrl + `/api/v1/reviews?id=${reviewId}&productId=${productId}`
         );
 
         dispatch({
