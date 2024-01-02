@@ -18,7 +18,7 @@ app.use(fileUpload());
 
 // blocked by cors
 app.use(cors({
-    origin: process.env.ORIGIN_URL,
+    origin: [process.env.ORIGIN_URL, "http://localhost:3000"],
     method: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization']

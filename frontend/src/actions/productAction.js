@@ -18,14 +18,22 @@ import {
     CLEAR_ERRORS
 } from "../constants/productConstant";
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+console.log(backendUrl); // Check the value in the console
+
+console.log(process.env);
+
+
 export const getProduct = (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
     async (dispatch) => {
         try {
             dispatch({ type: ALL_PRODUCT_REQUEST });
 
-            let link = `https://ecomm-server-ten.vercel.app/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+            let link = backendUrl + `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+            console.log(link);
+
             if (category) {
-                link = `https://ecomm-server-ten.vercel.app/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+                link = backendUrl + `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
             }
 
             // GET all products from BACKEND
