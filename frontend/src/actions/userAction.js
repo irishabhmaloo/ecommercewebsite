@@ -45,7 +45,7 @@ export const login = (email, password) => async (dispatch) => {
     try {
         dispatch({ type: LOGIN_REQUEST });
 
-        const config = { headers: { "Content-Type": "application/json" } };
+        const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
 
         const { data } = await axios.post(
             backendUrl + `/api/v1/login`,
@@ -64,7 +64,7 @@ export const register = (userData) => async (dispatch) => {
     try {
         dispatch({ type: REGISTER_USER_REQUEST });
 
-        const config = { headers: { "Content-Type": "multipart/form-data" } };
+        const config = { headers: { "Content-Type": "multipart/form-data" }, withCredentials: true};
 
         const { data } = await axios.post(backendUrl + `/api/v1/register`, userData, config);
 
@@ -82,7 +82,8 @@ export const loadUser = () => async (dispatch) => {
     try {
         dispatch({ type: LOAD_USER_REQUEST });
 
-        const { data } = await axios.get(backendUrl + `/api/v1/me`);
+        const config = { withCredentials: true };
+        const { data } = await axios.get(backendUrl + `/api/v1/me`, config);
 
         dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
     } catch (error) {
@@ -106,7 +107,7 @@ export const updateProfile = (userData) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_PROFILE_REQUEST });
 
-        const config = { headers: { "Content-Type": "multipart/form-data" } };
+        const config = { headers: { "Content-Type": "multipart/form-data" }, withCredentials: true};
 
         const { data } = await axios.put(backendUrl + `/api/v1/me/update`, userData, config);
 
@@ -124,7 +125,7 @@ export const updatePassword = (passwords) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_PASSWORD_REQUEST });
 
-        const config = { headers: { "Content-Type": "application/json" } };
+        const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
 
         const { data } = await axios.put(
             backendUrl + `/api/v1/password/update`,
@@ -146,7 +147,7 @@ export const forgotPassword = (email) => async (dispatch) => {
     try {
         dispatch({ type: FORGOT_PASSWORD_REQUEST });
 
-        const config = { headers: { "Content-Type": "application/json" } };
+        const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
 
         const { data } = await axios.post(backendUrl + `/api/v1/password/forgot`, email, config);
 
@@ -164,7 +165,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
     try {
         dispatch({ type: RESET_PASSWORD_REQUEST });
 
-        const config = { headers: { "Content-Type": "application/json" } };
+        const config = { headers: { "Content-Type": "application/json" }, withCredentials: true };
 
         const { data } = await axios.put(
             backendUrl + `/api/v1/password/reset/${token}`,

@@ -76,6 +76,7 @@ export const newReview = (reviewData) => async (dispatch) => {
 
         const config = {
             headers: { "Content-Type": "application/json" },
+            withCredentials: true
         };
 
         const { data } = await axios.put(backendUrl + `/api/v1/review`, reviewData, config);
@@ -116,8 +117,10 @@ export const deleteReviews = (reviewId, productId) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_REVIEW_REQUEST });
 
+        const config = { withCredentials: true };
         const { data } = await axios.delete(
-            backendUrl + `/api/v1/reviews?id=${reviewId}&productId=${productId}`
+            backendUrl + `/api/v1/reviews?id=${reviewId}&productId=${productId}`,
+            config
         );
 
         dispatch({
