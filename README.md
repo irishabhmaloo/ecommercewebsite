@@ -10,6 +10,7 @@ ShauKing is an ecommerce website application developed using the MERN stack, Red
    git clone https://github.com/irishabhmaloo/ecommercewebsite.git
    ```
 
+
 Install dependencies:
 
 ## In the root folder
