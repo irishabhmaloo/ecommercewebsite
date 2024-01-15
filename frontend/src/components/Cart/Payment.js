@@ -22,6 +22,7 @@ import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
     const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
+    const backendUrl = process.env.REACT_APP_BACKEND_URL; 
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -57,9 +58,10 @@ const Payment = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
+                withCredentials: true
             };
             const { data } = await axios.post(
-                "/api/v1/payment/process",
+                backendUrl + "/api/v1/payment/process",
                 paymentData,
                 config
             );
