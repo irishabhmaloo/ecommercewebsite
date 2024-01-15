@@ -34,12 +34,13 @@ import About from "./components/layout/About/About.js";
 
 function App() {
 
+  const backendUrl = process.env.REACT_APP_BACKEND_URL; 
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
   const [stripeApiKey, setStripeApiKey] = useState("");
 
   async function getStripeApiKey() {
-    const { data } = await axios.get("/api/v1/stripeapikey");
+    const { data } = await axios.get(backendUrl + "/api/v1/stripeapikey");
 
     setStripeApiKey(data.stripeApiKey);
   }
