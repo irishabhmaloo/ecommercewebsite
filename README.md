@@ -68,6 +68,10 @@ npm start
 
 Access the application in your web browser at http://localhost:3000.
 
+## Architecture Diagram
+
+![Architecture Diagram](images/architecture_diagram.png)
+
 ## Features
 - **User Authentication:** Secure user authentication for a personalized experience.
 - **Product Browsing:** Browse a wide range of products with ease.
