@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Rating } from "@mui/lab";
+import { Rating } from '@mui/material';
 
 const ProductCard = ({ product }) => {
 

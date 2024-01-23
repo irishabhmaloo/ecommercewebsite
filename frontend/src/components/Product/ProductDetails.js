@@ -21,7 +21,7 @@ import {
     DialogTitle,
     Button,
 } from "@mui/material";
-import { Rating } from "@mui/lab";
+import { Rating } from '@mui/material';
 import { NEW_REVIEW_RESET } from "../../constants/productConstant"
 
 const ProductDetails = () => {
@@ -44,7 +44,7 @@ const ProductDetails = () => {
     const [comment, setComment] = useState("");
 
     const increaseQuantity = () => {
-        if (product.Stock <= quantity) return;
+        if (product.stock <= quantity) return;
 
         const qty = quantity + 1;
         setQuantity(qty);
@@ -149,7 +149,7 @@ const ProductDetails = () => {
                                     <button onClick={increaseQuantity}>+</button>
                                 </div>
                                 <button
-                                    disabled={product.Stock < 1 ? true : false}
+                                    disabled={product.stock < 1 ? true : false}
                                     onClick={addToCartHandler}
                                 >
                                     Add to Cart
@@ -158,8 +158,8 @@ const ProductDetails = () => {
 
                             <p>
                                 Status:
-                                <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
-                                    {product.Stock < 1 ? "OutOfStock" : "InStock"}
+                                <b className={product.stock < 1 ? "redColor" : "greenColor"}>
+                                    {product.stock < 1 ? "OutOfStock" : "InStock"}
                                 </b>
                             </p>
                         </div>
