@@ -16,13 +16,29 @@ import {
   clearErrors,
 } from "../../actions/orderAction";
 import { DELETE_ORDER_RESET } from "../../constants/orderConstant";
+import { makeStyles } from "@mui/styles";
+
+
 
 const OrderList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const alert = useAlert();
+  const useStyles = makeStyles({
+    deliveredText: {
+      "& .MuiDataGrid-cellContent": {
+        color: "green !important",
+      },
+    },
+    notDeliveredText: {
+      "& .MuiDataGrid-cellContent": {
+        color: "red !important",
+      },
+    },
+  });
 
+  const alert = useAlert();
+  const classes = useStyles();
   const { error, orders } = useSelector((state) => state.allOrders);
 
   const { error: deleteError, isDeleted } = useSelector((state) => state.order);
@@ -59,11 +75,10 @@ const OrderList = () => {
       headerName: "Status",
       minWidth: 150,
       flex: 0.5,
-      cellClassName: (params) => {
-        return params.status === "Delivered"
-          ? "greenColor"
-          : "redColor";
-      },
+      cellClassName: (params) =>
+      params.row.status === "Delivered"
+        ? classes.deliveredText
+        : classes.notDeliveredText,
     },
     {
       field: "itemsQty",

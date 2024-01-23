@@ -15,7 +15,7 @@ router.route("/password/update").put(isAuthenticator, updatePassword);
 router.route("/me/update").put(isAuthenticator, updateProfile);
 
 router.route("/admin/users").get(isAuthenticator, authorizeRoles("admin"), getAllUsers);
-router.route("/admin/users/:id")
+router.route("/admin/user/:id")
     .get(isAuthenticator, authorizeRoles("admin"), getSingleUser)
     .put(isAuthenticator, authorizeRoles("admin"), updateUserRole)
     .delete(isAuthenticator, authorizeRoles("admin"), deleteUser);

@@ -227,7 +227,7 @@ exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
 
 // GET single users -- ADMIN
 exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
-    const users = await User.findById(req.params.id); 
+    const user = await User.findById(req.params.id); 
     
     if (!user) {
         return next(new ErrorHandler("User does not exists", 404));
@@ -235,7 +235,7 @@ exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        users
+        user
     });
 });
 
@@ -248,7 +248,7 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
         role: req.body.role
     };
 
-    await User.findByIdAndUpdate(req.user.id, newUserData, {
+    const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
         new: true,
         runValidators: true,
         useFindAndModify: false
@@ -276,7 +276,7 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
     
       await cloudinary.v2.uploader.destroy(imageId);
     
-      await user.remove();
+      await User.deleteOne({ _id: req.params.id });
 
     res.status(200).json({
         success: true,

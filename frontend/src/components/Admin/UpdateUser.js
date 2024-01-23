@@ -56,7 +56,7 @@ const UpdateUser = () => {
 
     if (isUpdated) {
       alert.success("User Updated Successfully");
-      NavigationPreloadManager("/admin/users");
+      navigate("/admin/users");
       dispatch({ type: UPDATE_USER_RESET });
     }
   }, [dispatch, alert, error, navigate, isUpdated, updateError, user, userId]);
@@ -69,7 +69,7 @@ const UpdateUser = () => {
     myForm.set("name", name);
     myForm.set("email", email);
     myForm.set("role", role);
-
+    
     dispatch(updateUser(userId, myForm));
   };
 
