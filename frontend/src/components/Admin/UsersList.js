@@ -12,11 +12,26 @@ import SideBar from "./Sidebar";
 import { useNavigate } from 'react-router-dom';
 import { getAllUsers, clearErrors, deleteUser } from "../../actions/userAction";
 import { DELETE_USER_RESET } from "../../constants/userConstant";
+import { makeStyles } from "@mui/styles";
 
 const UsersList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
+
+  const useStyles = makeStyles({
+    normalUser: {
+      "& .MuiDataGrid-cellContent": {
+        color: "green !important",
+      },
+    },
+    adminUser: {
+      "& .MuiDataGrid-cellContent": {
+        color: "red !important",
+      },
+    },
+  });
+  const classes = useStyles();
 
   const { error, users } = useSelector((state) => state.allUsers);
 
@@ -72,11 +87,10 @@ const UsersList = () => {
       type: "number",
       minWidth: 150,
       flex: 0.3,
-      cellClassName: (params) => {
-        return params.row.role === "admin"
-          ? "greenColor"
-          : "redColor";
-      },
+      cellClassName: (params) =>
+      params.row.role === "admin"
+        ? classes.adminUser
+        : classes.normalUser,
     },
 
     {

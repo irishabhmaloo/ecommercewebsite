@@ -218,7 +218,7 @@ export const getAllUsers = () => async (dispatch) => {
   
       const config = { headers: { "Content-Type": "application/json"}, withCredentials: true, };
 
-      const { data } = await axios.put(
+      const { data } = await axios.patch(
         backendUrl + `/api/v1/admin/user/${id}`,
         userData,
         config
