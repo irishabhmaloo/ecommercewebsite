@@ -13,7 +13,7 @@ import MetaData from "../layout/metaData";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Star from "@mui/icons-material/Star";
 import { useNavigate } from 'react-router-dom';
-
+import { makeStyles } from "@mui/styles";
 import SideBar from "./Sidebar";
 import { DELETE_REVIEW_RESET } from "../../constants/productConstant";
 
@@ -21,6 +21,20 @@ const ProductReviews = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
+
+  const useStyles = makeStyles({
+    highRated: {
+      "& .MuiDataGrid-cellContent": {
+        color: "green !important",
+      },
+    },
+    lowRated: {
+      "& .MuiDataGrid-cellContent": {
+        color: "red !important",
+      },
+    },
+  });
+  const classes = useStyles();
 
   const { error: deleteError, isDeleted } = useSelector(
     (state) => state.review
@@ -86,11 +100,10 @@ const ProductReviews = () => {
       minWidth: 180,
       flex: 0.4,
 
-      cellClassName: (params) => {
-        return params.row.rating >= 3
-          ? "greenColor"
-          : "redColor";
-      },
+      cellClassName: (params) =>
+      params.row.rating >= 3
+        ? classes.highRated
+        : classes.lowRated,
     },
 
     {
@@ -148,7 +161,9 @@ const ProductReviews = () => {
                 placeholder="Product Id"
                 required
                 value={productId}
-                onChange={(e) => setProductId(e.target.value)}
+                onChange={(e) => {
+                  // console.log(e.target.value)
+                  setProductId(e.target.value)}}
               />
             </div>
 
