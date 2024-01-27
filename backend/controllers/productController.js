@@ -106,7 +106,13 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
 
     // Images Update
   let images = [];
-  images = JSON.parse(req.body.image);
+  if (typeof req.body.image === "string") // single image
+    {
+        images.push(req.body.image);
+    } else // array of images
+    {
+        images = JSON.parse(req.body.image);
+    } 
 
   if (images !== undefined) {
     // Deleting Images From Cloudinary
