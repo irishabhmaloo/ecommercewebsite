@@ -141,9 +141,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
 
     res.status(200).json({
         status: "success",
-        data: {
-            product
-        }
+        product
     });
 });
 
@@ -160,8 +158,8 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
         await cloudinary.v2.uploader.destroy(product.image[i].public_id);
     }
 
-    // await Product.deleteOne({ _id: req.params.id });
-    await product.remove();
+    await Product.deleteOne({ _id: req.params.id });
+    // await product.remove();
 
     res.status(200).json({
         status: "success",

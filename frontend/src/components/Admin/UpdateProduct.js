@@ -63,7 +63,7 @@ const UpdateProduct = () => {
       setPrice(product.price);
       setCategory(product.category);
       setStock(product.stock);
-      setOldImages(product.images);
+      setOldImages(product.image);
     }
     
     if (error) {
@@ -104,7 +104,7 @@ const UpdateProduct = () => {
     myForm.set("stock", Stock);
 
     images.forEach((image) => {
-      myForm.append("images", image);
+      myForm.append("image", image);
     });
     dispatch(updateProduct(productId, myForm));
   };
@@ -141,7 +141,7 @@ const UpdateProduct = () => {
             encType="multipart/form-data"
             onSubmit={updateProductSubmitHandler}
           >
-            <h1>Create Product</h1>
+            <h1>Update Product</h1>
 
             <div>
               <SpellcheckIcon />
@@ -214,7 +214,7 @@ const UpdateProduct = () => {
 
             <div id="createProductFormImage">
               {oldImages &&
-                oldImages.map((image, index) => (
+                oldImages.map((image, index) => (            
                   <img key={index} src={image.url} alt="Old Product Preview" />
                 ))}
             </div>
@@ -230,7 +230,7 @@ const UpdateProduct = () => {
               type="submit"
               disabled={loading ? true : false}
             >
-              Create
+              Update
             </Button>
           </form>
         </div>

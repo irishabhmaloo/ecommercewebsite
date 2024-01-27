@@ -9,9 +9,9 @@ router
   .route("/admin/products")
   .get(isAuthenticator, authorizeRoles("admin"), getAdminProducts);
 
-  router.route("/admin/products/new").post(isAuthenticator, authorizeRoles("admin"), createProduct);
-  router.route("/admin/products/:id")
-    .patch(isAuthenticator, authorizeRoles("admin"), updateProduct)
+  router.route("/admin/product/new").post(isAuthenticator, authorizeRoles("admin"), createProduct);
+  router.route("/admin/product/:id")
+    .put(isAuthenticator, authorizeRoles("admin"), updateProduct)
     .delete(isAuthenticator, authorizeRoles("admin"), deleteProduct);
 
 router.route("/products/:id").get(getProductDetails);
