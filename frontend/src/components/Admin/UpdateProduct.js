@@ -102,7 +102,10 @@ const UpdateProduct = () => {
     myForm.set("description", description);
     myForm.set("category", category);
     myForm.set("stock", Stock);
-    myForm.set("image", JSON.stringify(images));
+    
+    images.forEach((image) => {
+      myForm.append("image", image);
+    });
 
     dispatch(updateProduct(productId, myForm));
   };
@@ -130,7 +133,7 @@ const UpdateProduct = () => {
 
   return (
     <Fragment>
-      <MetaData title="Create Product" />
+      <MetaData title="Update Product" />
       <div className="dashboard">
         <SideBar />
         <div className="newProductContainer">
