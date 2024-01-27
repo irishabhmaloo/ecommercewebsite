@@ -47,7 +47,7 @@ const NewProduct = () => {
 
     if (success) {
       alert.success("Product Created Successfully");
-      navigate("/admin/dashboard");
+      navigate("/admin/products");
       dispatch({ type: NEW_PRODUCT_RESET });
     }
   }, [dispatch, navigate, alert, error, success]);
@@ -62,10 +62,8 @@ const NewProduct = () => {
     myForm.set("description", description);
     myForm.set("category", category);
     myForm.set("stock", Stock);
+    myForm.set("image", JSON.stringify(images));
 
-    images.forEach((image) => {
-      myForm.append("images", image);
-    });
     dispatch(createProduct(myForm));
   };
 

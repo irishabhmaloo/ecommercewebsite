@@ -8,19 +8,21 @@ const cloudinary = require("cloudinary");
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
     let images = [];
+    images = JSON.parse(req.body.image);
 
-    if (typeof req.body.images === "string") // single image
-    {
-        images.push(req.body.images);
-    } else // array of images
-    {
-        images = req.body.images;
-    }
+    // if (typeof req.body.image === "string") // single image
+    // {
+    //     images.push(req.body.image);
+    // } else // array of images
+    // {
+    //     images = req.body.image;
+    // }
 
     const imagesLinks = [];
 
     // upload images on cloudinary
     for (let i = 0; i < images.length; i++) {
+               
         const result = await cloudinary.v2.uploader.upload(images[i], {
             folder: "products",
         });
@@ -31,7 +33,7 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
         });
     }
 
-    req.body.images = imagesLinks;
+    req.body.image = imagesLinks;
     req.body.user = req.user.id;
 
     const product = await Product.create(req.body);
@@ -104,12 +106,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
 
     // Images Update
   let images = [];
-
-  if (typeof req.body.images === "string") {
-    images.push(req.body.images);
-  } else {
-    images = req.body.images;
-  }
+  images = JSON.parse(req.body.image);
 
   if (images !== undefined) {
     // Deleting Images From Cloudinary
@@ -130,7 +127,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
       });
     }
 
-    req.body.images = imagesLinks;
+    req.body.image = imagesLinks;
   }
 
     product = await Product.findByIdAndUpdate(req.params.id, req.body, {
